@@ -1,12 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Great Stuff</title>
+    <title>Better with Python</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <h2>Home page for awesome's</h2>
+    <div class="container">
+        <h1>Premissions in Django REST FRAMEWORK</h1>
+        <p>
+            Permissions are set to limit the authority of any random user to
+            alter the behaviour of the data stored in database.
+            While working with the api we specially need to think of the security
+            of our end points and the authentications related to it.
+
+            in rest_framework with django we can set theses permissions in
+            {root-project-dir}/settings.py
+        </p>
+
+        <div class="container">
+            <code>
+                <pre>
+    REST_FRAMEWORK = {
+        'DEFAULT_PERMISSION_CLASSES': [
+            'rest_framework.permissions.AllowAny'
+        ],
+    }
+                </pre>
+            </code>
+        </div>
+        <p>
+            REST_FRAMEWORK is a dictionary that holds the key as permission classes,
+            and the values can be mulitple so it is a python list. Note that the values
+            and the key itself is str object of python which we call string in other languages.
+            By default the value is set to AllowAny class which is the part of
+            rest_framework.permissions module or file.
+        </p>
+        <p>
+            There are multiple
+            places we could do this—project-level, view-level, or object-level
+        </p>
+
+        <div id="view-level-permissions" class="python-code">
+            <h2>View-level Permissions</h2>
+            <code>
+                <pre>
+                    from rest_framework import premissions
+
+                    permission_classes = (permissions.IsAuthenticated,)
+                    # permission_classes is class attribute(should be exaclty named) and is assigned a list of Premissions
+                    # from permission module of rest_framework.permissions module.
+                    # this will require the user to authenticate itself to access the resource at this end point
+                </pre>
+            </code>
+        </div>
+
+        <div id="project-level-permissions" class="python-code">
+            <h2>Project-Level Permissions</h2>
+            <p>This is required to apply project level permissions. it helps to reduce the redundancy
+                over applying the permssions to every view.
+            </p>
+            <p>
+            <ol>
+                <li><strong>AllowAny</strong>- any user, authenticated or not, has full access</li>
+                <li><strong>IsAuthenticated</strong> - only authenticated, registered users have access</li>
+                <li><strong>IsAdminUser</strong> - only admins/superusers have access</li>
+                <li> <strong>IsAuthenticatedOrReadOnly</strong> - unauthorized users can view any page, but only
+                    authenticated users have write, edit, or delete privileges
+                </li>
+            </ol>
+            </p>
+            <code>
+                <pre>
+                    REST_FRAMEWORK = {
+                        'DEFAULT_PERMISSION_CLASSES': [
+                            'rest_framework.permissions.(AllowAny/ IsAuthenticated/ IsAdminUser/ IsAuthenticatedOrReadOnly)'
+                        ],
+                    }
+                </pre>
+            </code>
+        </div>
+
+        <div id="custom-permissions" class="python-code">
+            <h2>Custom permissions</h2>
+            <p>Internally, Django REST Framework relies on a <strong>BasePermission</strong>  class from which all
+                other permission classes inherit. That means the built-in permissions settings like
+                AllowAny , IsAuthenticated , and others extend it.</p>
+            <code>
+                <pre>
+                    
+                </pre>
+            </code>
+        </div>
+    </div>
+    <hr>
+    <div class="container" id="authentication-rest-framework">
+        <h1>Authentication in Django REST FRAMEWORK</h1>
+    </div>
 </body>
+
 </html>
